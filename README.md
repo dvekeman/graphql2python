@@ -2,4 +2,4 @@
 
 ## Contributions
 
-- Andrey Mnatsakanov: for the initial version
+- Thanks to Andrey Mnatsakanov: for the initial version
