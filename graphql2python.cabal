@@ -1,0 +1,116 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: a2044ec63b16e35c6544562870c095dc08fbf34a1171b3861ec59d986d6adf26
+
+name:           graphql2python
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/graphql2python#readme>
+homepage:       https://github.com/githubuser/graphql2python#readme
+bug-reports:    https://github.com/githubuser/graphql2python/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2020 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/graphql2python
+
+library
+  exposed-modules:
+      Gql2Py.Parser
+      Gql2Py.Printer
+      Gql2Py.Syntax
+  other-modules:
+      Paths_graphql2python
+  hs-source-dirs:
+      src
+  default-extensions: NoImplicitPrelude
+  ghc-options: -O2 -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns
+  build-depends:
+      aeson
+    , attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , filepath
+    , hedgehog
+    , prettyprinter
+    , protolude
+    , regex-tdfa >=1.2
+    , scientific
+    , template-haskell
+    , text
+    , text-builder
+    , th-lift-instances
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+executable graphql2python-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_graphql2python
+  hs-source-dirs:
+      app
+  default-extensions: NoImplicitPrelude
+  ghc-options: -O2 -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -O2 -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns
+  build-depends:
+      aeson
+    , attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , filepath
+    , graphql2python
+    , hedgehog
+    , prettyprinter
+    , protolude
+    , regex-tdfa >=1.2
+    , scientific
+    , template-haskell
+    , text
+    , text-builder
+    , th-lift-instances
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+test-suite graphql2python-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_graphql2python
+  hs-source-dirs:
+      test
+  default-extensions: NoImplicitPrelude
+  ghc-options: -O2 -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      aeson
+    , attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , containers
+    , filepath
+    , graphql2python
+    , hedgehog
+    , prettyprinter
+    , protolude
+    , regex-tdfa >=1.2
+    , scientific
+    , template-haskell
+    , text
+    , text-builder
+    , th-lift-instances
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
