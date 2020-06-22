@@ -10,7 +10,7 @@ import Gql2Py.Printer (renderSchemaDoc)
 
 main :: IO ()
 main = do
-  s <- readFile "../schema.graphql"
+  s <- readFile "./schema.graphql"
   let schema = parseSchemaDoc s
 --  let text = renderSchemaDoc schema
   either (fail . show) f schema
