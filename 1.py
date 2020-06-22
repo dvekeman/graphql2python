@@ -8,13 +8,13 @@ from uuid import UUID
 
 @dataclass(frozen=True)
 class customer:
-    created_at: Optional[datetime.datetime] = None
-    custom_fields: Optional[Dict] = None
-    customer_id: Optional[str] = None
-    invoices: Optional[List[invoice]] = None
-    invoices_aggregate: Optional[invoice_aggregate] = None
-    reference: Optional[UUID] = None
-    updated_at: Optional[datetime.datetime] = None    
+    created_at: datetime.datetime
+    custom_fields: Dict
+    customer_id: str
+    invoices: List[invoice]
+    invoices_aggregate: invoice_aggregate
+    reference: UUID
+    updated_at: datetime.datetime    
 
     def to_json(self):
         res = {}
@@ -50,8 +50,8 @@ class customer:
 
 @dataclass(frozen=True)
 class customer_aggregate:
-    aggregate: customer_aggregate_fields
-    nodes: Optional[List[customer]] = None    
+    nodes: List[customer]
+    aggregate: Optional[customer_aggregate_fields] = None    
 
     def to_json(self):
         res = {}
@@ -72,9 +72,9 @@ class customer_aggregate:
 
 @dataclass(frozen=True)
 class customer_aggregate_fields:
-    count: int
-    max: customer_max_fields
-    min: customer_min_fields    
+    count: Optional[int] = None
+    max: Optional[customer_max_fields] = None
+    min: Optional[customer_min_fields] = None    
 
     def to_json(self):
         res = {}
@@ -102,10 +102,10 @@ class customer_constraint(Enum):
 
 @dataclass(frozen=True)
 class customer_max_fields:
-    created_at: datetime.datetime
-    customer_id: str
-    reference: UUID
-    updated_at: datetime.datetime    
+    created_at: Optional[datetime.datetime] = None
+    customer_id: Optional[str] = None
+    reference: Optional[UUID] = None
+    updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
@@ -132,10 +132,10 @@ class customer_max_fields:
 
 @dataclass(frozen=True)
 class customer_min_fields:
-    created_at: datetime.datetime
-    customer_id: str
-    reference: UUID
-    updated_at: datetime.datetime    
+    created_at: Optional[datetime.datetime] = None
+    customer_id: Optional[str] = None
+    reference: Optional[UUID] = None
+    updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
@@ -162,8 +162,8 @@ class customer_min_fields:
 
 @dataclass(frozen=True)
 class customer_mutation_response:
-    affected_rows: Optional[int] = None
-    returning: Optional[List[customer]] = None    
+    affected_rows: int
+    returning: List[customer]    
 
     def to_json(self):
         res = {}
@@ -200,17 +200,17 @@ class customer_update_column(Enum):
 
 @dataclass(frozen=True)
 class invoice:
-    status: str
-    created_at: Optional[datetime.datetime] = None
-    customer: Optional[UUID] = None
-    customer_by_reference: Optional[customer] = None
-    due_date: Optional[datetime.datetime] = None
-    invoice_number: Optional[str] = None
-    processing_status: Optional[str] = None
-    reference: Optional[UUID] = None
-    total_amount: Optional[int] = None
-    total_amount_currency: Optional[str] = None
-    updated_at: Optional[datetime.datetime] = None    
+    created_at: datetime.datetime
+    customer: UUID
+    customer_by_reference: customer
+    due_date: datetime.datetime
+    invoice_number: str
+    processing_status: str
+    reference: UUID
+    total_amount: int
+    total_amount_currency: str
+    updated_at: datetime.datetime
+    status: Optional[str] = None    
 
     def to_json(self):
         res = {}
@@ -258,8 +258,8 @@ class invoice:
 
 @dataclass(frozen=True)
 class invoice_aggregate:
-    aggregate: invoice_aggregate_fields
-    nodes: Optional[List[invoice]] = None    
+    nodes: List[invoice]
+    aggregate: Optional[invoice_aggregate_fields] = None    
 
     def to_json(self):
         res = {}
@@ -280,17 +280,17 @@ class invoice_aggregate:
 
 @dataclass(frozen=True)
 class invoice_aggregate_fields:
-    avg: invoice_avg_fields
-    count: int
-    max: invoice_max_fields
-    min: invoice_min_fields
-    stddev: invoice_stddev_fields
-    stddev_pop: invoice_stddev_pop_fields
-    stddev_samp: invoice_stddev_samp_fields
-    sum: invoice_sum_fields
-    var_pop: invoice_var_pop_fields
-    var_samp: invoice_var_samp_fields
-    variance: invoice_variance_fields    
+    avg: Optional[invoice_avg_fields] = None
+    count: Optional[int] = None
+    max: Optional[invoice_max_fields] = None
+    min: Optional[invoice_min_fields] = None
+    stddev: Optional[invoice_stddev_fields] = None
+    stddev_pop: Optional[invoice_stddev_pop_fields] = None
+    stddev_samp: Optional[invoice_stddev_samp_fields] = None
+    sum: Optional[invoice_sum_fields] = None
+    var_pop: Optional[invoice_var_pop_fields] = None
+    var_samp: Optional[invoice_var_samp_fields] = None
+    variance: Optional[invoice_variance_fields] = None    
 
     def to_json(self):
         res = {}
@@ -338,7 +338,7 @@ class invoice_aggregate_fields:
 
 @dataclass(frozen=True)
 class invoice_avg_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -360,15 +360,15 @@ class invoice_constraint(Enum):
 
 @dataclass(frozen=True)
 class invoice_max_fields:
-    created_at: datetime.datetime
-    customer: UUID
-    due_date: datetime.datetime
-    invoice_number: str
-    processing_status: str
-    reference: UUID
-    total_amount: int
-    total_amount_currency: str
-    updated_at: datetime.datetime    
+    created_at: Optional[datetime.datetime] = None
+    customer: Optional[UUID] = None
+    due_date: Optional[datetime.datetime] = None
+    invoice_number: Optional[str] = None
+    processing_status: Optional[str] = None
+    reference: Optional[UUID] = None
+    total_amount: Optional[int] = None
+    total_amount_currency: Optional[str] = None
+    updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
@@ -410,15 +410,15 @@ class invoice_max_fields:
 
 @dataclass(frozen=True)
 class invoice_min_fields:
-    created_at: datetime.datetime
-    customer: UUID
-    due_date: datetime.datetime
-    invoice_number: str
-    processing_status: str
-    reference: UUID
-    total_amount: int
-    total_amount_currency: str
-    updated_at: datetime.datetime    
+    created_at: Optional[datetime.datetime] = None
+    customer: Optional[UUID] = None
+    due_date: Optional[datetime.datetime] = None
+    invoice_number: Optional[str] = None
+    processing_status: Optional[str] = None
+    reference: Optional[UUID] = None
+    total_amount: Optional[int] = None
+    total_amount_currency: Optional[str] = None
+    updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
@@ -460,8 +460,8 @@ class invoice_min_fields:
 
 @dataclass(frozen=True)
 class invoice_mutation_response:
-    affected_rows: Optional[int] = None
-    returning: Optional[List[invoice]] = None    
+    affected_rows: int
+    returning: List[invoice]    
 
     def to_json(self):
         res = {}
@@ -494,7 +494,7 @@ class invoice_select_column(Enum):
 
 @dataclass(frozen=True)
 class invoice_stddev_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -512,7 +512,7 @@ class invoice_stddev_fields:
 
 @dataclass(frozen=True)
 class invoice_stddev_pop_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -530,7 +530,7 @@ class invoice_stddev_pop_fields:
 
 @dataclass(frozen=True)
 class invoice_stddev_samp_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -548,7 +548,7 @@ class invoice_stddev_samp_fields:
 
 @dataclass(frozen=True)
 class invoice_sum_fields:
-    total_amount: int    
+    total_amount: Optional[int] = None    
 
     def to_json(self):
         res = {}
@@ -578,7 +578,7 @@ class invoice_update_column(Enum):
 
 @dataclass(frozen=True)
 class invoice_var_pop_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -596,7 +596,7 @@ class invoice_var_pop_fields:
 
 @dataclass(frozen=True)
 class invoice_var_samp_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -614,7 +614,7 @@ class invoice_var_samp_fields:
 
 @dataclass(frozen=True)
 class invoice_variance_fields:
-    total_amount: float    
+    total_amount: Optional[float] = None    
 
     def to_json(self):
         res = {}
@@ -632,18 +632,18 @@ class invoice_variance_fields:
 
 @dataclass(frozen=True)
 class mutation_root:
-    delete_customer: customer_mutation_response
-    delete_customer_by_pk: customer
-    delete_invoice: invoice_mutation_response
-    delete_invoice_by_pk: invoice
-    insert_customer: customer_mutation_response
-    insert_customer_one: customer
-    insert_invoice: invoice_mutation_response
-    insert_invoice_one: invoice
-    update_customer: customer_mutation_response
-    update_customer_by_pk: customer
-    update_invoice: invoice_mutation_response
-    update_invoice_by_pk: invoice    
+    delete_customer: Optional[customer_mutation_response] = None
+    delete_customer_by_pk: Optional[customer] = None
+    delete_invoice: Optional[invoice_mutation_response] = None
+    delete_invoice_by_pk: Optional[invoice] = None
+    insert_customer: Optional[customer_mutation_response] = None
+    insert_customer_one: Optional[customer] = None
+    insert_invoice: Optional[invoice_mutation_response] = None
+    insert_invoice_one: Optional[invoice] = None
+    update_customer: Optional[customer_mutation_response] = None
+    update_customer_by_pk: Optional[customer] = None
+    update_invoice: Optional[invoice_mutation_response] = None
+    update_invoice_by_pk: Optional[invoice] = None    
 
     def to_json(self):
         res = {}
@@ -703,12 +703,12 @@ class order_by(Enum):
 
 @dataclass(frozen=True)
 class query_root:
-    customer_by_pk: customer
-    invoice_by_pk: invoice
-    customer: Optional[List[customer]] = None
-    customer_aggregate: Optional[customer_aggregate] = None
-    invoice: Optional[List[invoice]] = None
-    invoice_aggregate: Optional[invoice_aggregate] = None    
+    customer: List[customer]
+    customer_aggregate: customer_aggregate
+    invoice: List[invoice]
+    invoice_aggregate: invoice_aggregate
+    customer_by_pk: Optional[customer] = None
+    invoice_by_pk: Optional[invoice] = None    
 
     def to_json(self):
         res = {}
@@ -741,12 +741,12 @@ class query_root:
 
 @dataclass(frozen=True)
 class subscription_root:
-    customer_by_pk: customer
-    invoice_by_pk: invoice
-    customer: Optional[List[customer]] = None
-    customer_aggregate: Optional[customer_aggregate] = None
-    invoice: Optional[List[invoice]] = None
-    invoice_aggregate: Optional[invoice_aggregate] = None    
+    customer: List[customer]
+    customer_aggregate: customer_aggregate
+    invoice: List[invoice]
+    invoice_aggregate: invoice_aggregate
+    customer_by_pk: Optional[customer] = None
+    invoice_by_pk: Optional[invoice] = None    
 
     def to_json(self):
         res = {}

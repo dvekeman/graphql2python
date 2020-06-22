@@ -204,7 +204,7 @@ data GType
   deriving (Eq, Show, Lift, Generic)
 
 instance Ord GType where
-  compare x y =  flip compare (isNullable x) (isNullable y)
+  compare x y =  compare (isNullable x) (isNullable y)
 
 
 

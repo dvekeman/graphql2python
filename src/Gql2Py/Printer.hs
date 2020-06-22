@@ -113,10 +113,10 @@ gtype_f1 = \case
   TypeList _ d -> list_type_f d
 
 nonNull_start :: (Printer a) => Nullability -> a
-nonNull_start n = bool (stringP "Optional[") mempty $ unNullability n
+nonNull_start n = bool (stringP "Optional[") mempty $ not (unNullability n)
 
 nonNull_end :: (Printer a) => Nullability -> a
-nonNull_end n = bool (stringP "] = None") mempty $ unNullability n
+nonNull_end n = bool (stringP "] = None") mempty $ not (unNullability n)
 
 type_f :: (Printer a) => NamedType -> a
 type_f (NamedType name) = name_f name
@@ -130,8 +130,9 @@ name_f (Name n) = case Txt.unpack n of
   "date" -> stringP "datetime.datetime"
   "Float" -> "float"
   "uuid" -> "UUID"
-  "numeric" -> "int"
+  "numeric" -> "decimal.Decimal"
   "bigint" -> "int"
+  "Boolean" -> "bool"
   _ -> textP n
 
 list_type_f :: (Printer a) => ListType -> a
