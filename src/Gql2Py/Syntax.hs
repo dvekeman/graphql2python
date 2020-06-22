@@ -201,7 +201,12 @@ newtype Nullability
 data GType
   = TypeNamed !Nullability !NamedType
   | TypeList !Nullability !ListType
-  deriving (Eq, Ord, Show, Lift, Generic)
+  deriving (Eq, Show, Lift, Generic)
+
+instance Ord GType where
+  compare x y =  flip compare (isNullable x) (isNullable y)
+
+
 
 class ToGType a where
   toGT :: a -> GType
@@ -304,9 +309,12 @@ data FieldDefinition
   , _fldType                :: !GType
   , _fldDirectives          :: ![Directive]
   }
-  deriving (Ord, Show, Eq, Lift, Generic)
+  deriving (Show, Eq, Lift, Generic)
 
 instance Hashable FieldDefinition
+
+instance Ord FieldDefinition where
+    compare x y = compare (_fldType x) (_fldType y)
 
 type ArgumentsDefinition = [InputValueDefinition]
 

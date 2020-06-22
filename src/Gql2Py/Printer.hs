@@ -37,11 +37,12 @@ class (Monoid a, IsString a) => Printer a where
 
 schemaDocument :: (Printer a) => SchemaDocument -> a
 schemaDocument ed =
-  stringP "import datatime\n"
+  stringP "from __future__ import annotations\n"
+  <> stringP "import datetime\n"
   <> stringP "import decimal\n"
   <> stringP "from dataclasses import dataclass\n"
   <> stringP "from typing import Optional, Dict, List\n"
-  <> stringP "from enum import Enum\n"
+  <> stringP "from enum import Enum, unique\n"
   <> stringP "from uuid import UUID\n\n"
   <> (mconcat $ intersperse (stringP "") $ map typeDefinition $
   getTypeDefinitions ed)
@@ -59,17 +60,40 @@ typeDefinition = \case
 typeDefinitionObject :: (Printer a) => ObjectTypeDefinition -> a
 typeDefinitionObject (ObjectTypeDefinition _ name _ _ fields) =
   stringP "@dataclass(frozen=True)\nclass " <> nameP name <> stringP ":\n"
-  <> optempty fields_f fields
+  <> optempty fields_f (sort fields)
   <> "    " <> stringP "\n\n"
-  <> stringP "    def to_json(self):\n"
-  <> stringP "        #TODO\n"
+  <> stringP "    def to_json(self):\n        res = {}\n"
+  <> optempty tojson_fields_f fields
+  <> stringP "\n        return res\n"
   <> stringP "        pass\n\n"
   <> stringP "    @classmethod\n"
   <> stringP "    def from_json(cls, d):\n"
-  <> stringP "        #return cls(\n"
-  <> stringP "        #    \n"
-  <> stringP "        #)\n"
+  <> stringP "        return cls(\n"
+  <> optempty fromjson_fields_f fields
+  <> stringP "\n        )\n"
   <> stringP "        pass\n\n"
+
+fields_quicksort :: Ord a => [a] -> [a]
+fields_quicksort []     = []
+fields_quicksort (p:xs) = (fields_quicksort lesser) ++ [p] ++ (fields_quicksort greater)
+    where
+        lesser  = filter (< p) xs
+        greater = filter (>= p) xs
+
+tojson_fields_f :: (Printer a) => [FieldDefinition] -> a
+tojson_fields_f = mconcat . intersperse (charP '\n') . map tojson_field_f
+
+tojson_field_f :: (Printer a) =>  FieldDefinition -> a
+tojson_field_f (FieldDefinition _ name _ gtype _) =
+  stringP "        if " <> nameP name <> stringP " is not None:\n" <> stringP "            res[\"" <> nameP name <> stringP "\"] = self." <> nameP name
+
+fromjson_fields_f :: (Printer a) => [FieldDefinition] -> a
+fromjson_fields_f = mconcat . intersperse (charP '\n') . map fromjson_field_f
+
+fromjson_field_f :: (Printer a) =>  FieldDefinition -> a
+fromjson_field_f (FieldDefinition _ name _ gtype _) =
+  stringP "            " <> nameP name <> stringP " = d[\"" <> nameP name <> stringP "\"],"
+
 
 fields_f :: (Printer a) => [FieldDefinition] -> a
 fields_f = mconcat . intersperse (charP '\n') . map field_f
@@ -107,6 +131,7 @@ name_f (Name n) = case Txt.unpack n of
   "Float" -> "float"
   "uuid" -> "UUID"
   "numeric" -> "int"
+  "bigint" -> "int"
   _ -> textP n
 
 list_type_f :: (Printer a) => ListType -> a
@@ -142,7 +167,7 @@ enum_value_f (EnumValueDefinition _ name _) =
 
 enum_value_name_f :: (Printer a) => EnumValue -> a
 enum_value_name_f (EnumValue name) =
-  stringP "    " <> nname_f name
+  stringP "    " <> nname_f name <> "= \"" <> nname_f name <> stringP "\""
 
 nname_f :: (Printer a) => Name -> a
 nname_f (Name n) =
