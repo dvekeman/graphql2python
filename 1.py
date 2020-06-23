@@ -18,19 +18,19 @@ class customer:
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if custom_fields is not None:
+        if self.custom_fields is not None:
             res["custom_fields"] = self.custom_fields
-        if customer_id is not None:
+        if self.customer_id is not None:
             res["customer_id"] = self.customer_id
-        if invoices is not None:
+        if self.invoices is not None:
             res["invoices"] = self.invoices
-        if invoices_aggregate is not None:
+        if self.invoices_aggregate is not None:
             res["invoices_aggregate"] = self.invoices_aggregate
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -38,13 +38,13 @@ class customer:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            custom_fields = d["custom_fields"],
-            customer_id = d["customer_id"],
-            invoices = d["invoices"],
-            invoices_aggregate = d["invoices_aggregate"],
-            reference = d["reference"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            custom_fields = ("custom_fields" in d) if d["custom_fields"] else None,
+            customer_id = ("customer_id" in d) if d["customer_id"] else None,
+            invoices = ("invoices" in d) if d["invoices"] else None,
+            invoices_aggregate = ("invoices_aggregate" in d) if d["invoices_aggregate"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -55,9 +55,9 @@ class customer_aggregate:
 
     def to_json(self):
         res = {}
-        if aggregate is not None:
+        if self.aggregate is not None:
             res["aggregate"] = self.aggregate
-        if nodes is not None:
+        if self.nodes is not None:
             res["nodes"] = self.nodes
         return res
         pass
@@ -65,8 +65,8 @@ class customer_aggregate:
     @classmethod
     def from_json(cls, d):
         return cls(
-            aggregate = d["aggregate"],
-            nodes = d["nodes"],
+            aggregate = ("aggregate" in d) if d["aggregate"] else None,
+            nodes = ("nodes" in d) if d["nodes"] else None,
         )
         pass
 
@@ -78,11 +78,11 @@ class customer_aggregate_fields:
 
     def to_json(self):
         res = {}
-        if count is not None:
+        if self.count is not None:
             res["count"] = self.count
-        if max is not None:
+        if self.max is not None:
             res["max"] = self.max
-        if min is not None:
+        if self.min is not None:
             res["min"] = self.min
         return res
         pass
@@ -90,9 +90,9 @@ class customer_aggregate_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            count = d["count"],
-            max = d["max"],
-            min = d["min"],
+            count = ("count" in d) if d["count"] else None,
+            max = ("max" in d) if d["max"] else None,
+            min = ("min" in d) if d["min"] else None,
         )
         pass
 
@@ -109,13 +109,13 @@ class customer_max_fields:
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if customer_id is not None:
+        if self.customer_id is not None:
             res["customer_id"] = self.customer_id
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -123,10 +123,10 @@ class customer_max_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            customer_id = d["customer_id"],
-            reference = d["reference"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            customer_id = ("customer_id" in d) if d["customer_id"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -139,13 +139,13 @@ class customer_min_fields:
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if customer_id is not None:
+        if self.customer_id is not None:
             res["customer_id"] = self.customer_id
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -153,10 +153,10 @@ class customer_min_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            customer_id = d["customer_id"],
-            reference = d["reference"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            customer_id = ("customer_id" in d) if d["customer_id"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -167,9 +167,9 @@ class customer_mutation_response:
 
     def to_json(self):
         res = {}
-        if affected_rows is not None:
+        if self.affected_rows is not None:
             res["affected_rows"] = self.affected_rows
-        if returning is not None:
+        if self.returning is not None:
             res["returning"] = self.returning
         return res
         pass
@@ -177,8 +177,8 @@ class customer_mutation_response:
     @classmethod
     def from_json(cls, d):
         return cls(
-            affected_rows = d["affected_rows"],
-            returning = d["returning"],
+            affected_rows = ("affected_rows" in d) if d["affected_rows"] else None,
+            returning = ("returning" in d) if d["returning"] else None,
         )
         pass
 
@@ -207,34 +207,34 @@ class invoice:
     invoice_number: str
     processing_status: str
     reference: UUID
-    total_amount: int
+    total_amount: decimal.Decimal
     total_amount_currency: str
     updated_at: datetime.datetime
     status: Optional[str] = None    
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if customer is not None:
+        if self.customer is not None:
             res["customer"] = self.customer
-        if customer_by_reference is not None:
+        if self.customer_by_reference is not None:
             res["customer_by_reference"] = self.customer_by_reference
-        if due_date is not None:
+        if self.due_date is not None:
             res["due_date"] = self.due_date
-        if invoice_number is not None:
+        if self.invoice_number is not None:
             res["invoice_number"] = self.invoice_number
-        if processing_status is not None:
+        if self.processing_status is not None:
             res["processing_status"] = self.processing_status
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if status is not None:
+        if self.status is not None:
             res["status"] = self.status
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
-        if total_amount_currency is not None:
+        if self.total_amount_currency is not None:
             res["total_amount_currency"] = self.total_amount_currency
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -242,17 +242,17 @@ class invoice:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            customer = d["customer"],
-            customer_by_reference = d["customer_by_reference"],
-            due_date = d["due_date"],
-            invoice_number = d["invoice_number"],
-            processing_status = d["processing_status"],
-            reference = d["reference"],
-            status = d["status"],
-            total_amount = d["total_amount"],
-            total_amount_currency = d["total_amount_currency"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            customer = ("customer" in d) if d["customer"] else None,
+            customer_by_reference = ("customer_by_reference" in d) if d["customer_by_reference"] else None,
+            due_date = ("due_date" in d) if d["due_date"] else None,
+            invoice_number = ("invoice_number" in d) if d["invoice_number"] else None,
+            processing_status = ("processing_status" in d) if d["processing_status"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            status = ("status" in d) if d["status"] else None,
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
+            total_amount_currency = ("total_amount_currency" in d) if d["total_amount_currency"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -263,9 +263,9 @@ class invoice_aggregate:
 
     def to_json(self):
         res = {}
-        if aggregate is not None:
+        if self.aggregate is not None:
             res["aggregate"] = self.aggregate
-        if nodes is not None:
+        if self.nodes is not None:
             res["nodes"] = self.nodes
         return res
         pass
@@ -273,8 +273,8 @@ class invoice_aggregate:
     @classmethod
     def from_json(cls, d):
         return cls(
-            aggregate = d["aggregate"],
-            nodes = d["nodes"],
+            aggregate = ("aggregate" in d) if d["aggregate"] else None,
+            nodes = ("nodes" in d) if d["nodes"] else None,
         )
         pass
 
@@ -294,27 +294,27 @@ class invoice_aggregate_fields:
 
     def to_json(self):
         res = {}
-        if avg is not None:
+        if self.avg is not None:
             res["avg"] = self.avg
-        if count is not None:
+        if self.count is not None:
             res["count"] = self.count
-        if max is not None:
+        if self.max is not None:
             res["max"] = self.max
-        if min is not None:
+        if self.min is not None:
             res["min"] = self.min
-        if stddev is not None:
+        if self.stddev is not None:
             res["stddev"] = self.stddev
-        if stddev_pop is not None:
+        if self.stddev_pop is not None:
             res["stddev_pop"] = self.stddev_pop
-        if stddev_samp is not None:
+        if self.stddev_samp is not None:
             res["stddev_samp"] = self.stddev_samp
-        if sum is not None:
+        if self.sum is not None:
             res["sum"] = self.sum
-        if var_pop is not None:
+        if self.var_pop is not None:
             res["var_pop"] = self.var_pop
-        if var_samp is not None:
+        if self.var_samp is not None:
             res["var_samp"] = self.var_samp
-        if variance is not None:
+        if self.variance is not None:
             res["variance"] = self.variance
         return res
         pass
@@ -322,17 +322,17 @@ class invoice_aggregate_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            avg = d["avg"],
-            count = d["count"],
-            max = d["max"],
-            min = d["min"],
-            stddev = d["stddev"],
-            stddev_pop = d["stddev_pop"],
-            stddev_samp = d["stddev_samp"],
-            sum = d["sum"],
-            var_pop = d["var_pop"],
-            var_samp = d["var_samp"],
-            variance = d["variance"],
+            avg = ("avg" in d) if d["avg"] else None,
+            count = ("count" in d) if d["count"] else None,
+            max = ("max" in d) if d["max"] else None,
+            min = ("min" in d) if d["min"] else None,
+            stddev = ("stddev" in d) if d["stddev"] else None,
+            stddev_pop = ("stddev_pop" in d) if d["stddev_pop"] else None,
+            stddev_samp = ("stddev_samp" in d) if d["stddev_samp"] else None,
+            sum = ("sum" in d) if d["sum"] else None,
+            var_pop = ("var_pop" in d) if d["var_pop"] else None,
+            var_samp = ("var_samp" in d) if d["var_samp"] else None,
+            variance = ("variance" in d) if d["variance"] else None,
         )
         pass
 
@@ -342,7 +342,7 @@ class invoice_avg_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -350,7 +350,7 @@ class invoice_avg_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -366,29 +366,29 @@ class invoice_max_fields:
     invoice_number: Optional[str] = None
     processing_status: Optional[str] = None
     reference: Optional[UUID] = None
-    total_amount: Optional[int] = None
+    total_amount: Optional[decimal.Decimal] = None
     total_amount_currency: Optional[str] = None
     updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if customer is not None:
+        if self.customer is not None:
             res["customer"] = self.customer
-        if due_date is not None:
+        if self.due_date is not None:
             res["due_date"] = self.due_date
-        if invoice_number is not None:
+        if self.invoice_number is not None:
             res["invoice_number"] = self.invoice_number
-        if processing_status is not None:
+        if self.processing_status is not None:
             res["processing_status"] = self.processing_status
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
-        if total_amount_currency is not None:
+        if self.total_amount_currency is not None:
             res["total_amount_currency"] = self.total_amount_currency
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -396,15 +396,15 @@ class invoice_max_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            customer = d["customer"],
-            due_date = d["due_date"],
-            invoice_number = d["invoice_number"],
-            processing_status = d["processing_status"],
-            reference = d["reference"],
-            total_amount = d["total_amount"],
-            total_amount_currency = d["total_amount_currency"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            customer = ("customer" in d) if d["customer"] else None,
+            due_date = ("due_date" in d) if d["due_date"] else None,
+            invoice_number = ("invoice_number" in d) if d["invoice_number"] else None,
+            processing_status = ("processing_status" in d) if d["processing_status"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
+            total_amount_currency = ("total_amount_currency" in d) if d["total_amount_currency"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -416,29 +416,29 @@ class invoice_min_fields:
     invoice_number: Optional[str] = None
     processing_status: Optional[str] = None
     reference: Optional[UUID] = None
-    total_amount: Optional[int] = None
+    total_amount: Optional[decimal.Decimal] = None
     total_amount_currency: Optional[str] = None
     updated_at: Optional[datetime.datetime] = None    
 
     def to_json(self):
         res = {}
-        if created_at is not None:
+        if self.created_at is not None:
             res["created_at"] = self.created_at
-        if customer is not None:
+        if self.customer is not None:
             res["customer"] = self.customer
-        if due_date is not None:
+        if self.due_date is not None:
             res["due_date"] = self.due_date
-        if invoice_number is not None:
+        if self.invoice_number is not None:
             res["invoice_number"] = self.invoice_number
-        if processing_status is not None:
+        if self.processing_status is not None:
             res["processing_status"] = self.processing_status
-        if reference is not None:
+        if self.reference is not None:
             res["reference"] = self.reference
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
-        if total_amount_currency is not None:
+        if self.total_amount_currency is not None:
             res["total_amount_currency"] = self.total_amount_currency
-        if updated_at is not None:
+        if self.updated_at is not None:
             res["updated_at"] = self.updated_at
         return res
         pass
@@ -446,15 +446,15 @@ class invoice_min_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            created_at = d["created_at"],
-            customer = d["customer"],
-            due_date = d["due_date"],
-            invoice_number = d["invoice_number"],
-            processing_status = d["processing_status"],
-            reference = d["reference"],
-            total_amount = d["total_amount"],
-            total_amount_currency = d["total_amount_currency"],
-            updated_at = d["updated_at"],
+            created_at = ("created_at" in d) if d["created_at"] else None,
+            customer = ("customer" in d) if d["customer"] else None,
+            due_date = ("due_date" in d) if d["due_date"] else None,
+            invoice_number = ("invoice_number" in d) if d["invoice_number"] else None,
+            processing_status = ("processing_status" in d) if d["processing_status"] else None,
+            reference = ("reference" in d) if d["reference"] else None,
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
+            total_amount_currency = ("total_amount_currency" in d) if d["total_amount_currency"] else None,
+            updated_at = ("updated_at" in d) if d["updated_at"] else None,
         )
         pass
 
@@ -465,9 +465,9 @@ class invoice_mutation_response:
 
     def to_json(self):
         res = {}
-        if affected_rows is not None:
+        if self.affected_rows is not None:
             res["affected_rows"] = self.affected_rows
-        if returning is not None:
+        if self.returning is not None:
             res["returning"] = self.returning
         return res
         pass
@@ -475,8 +475,8 @@ class invoice_mutation_response:
     @classmethod
     def from_json(cls, d):
         return cls(
-            affected_rows = d["affected_rows"],
-            returning = d["returning"],
+            affected_rows = ("affected_rows" in d) if d["affected_rows"] else None,
+            returning = ("returning" in d) if d["returning"] else None,
         )
         pass
 
@@ -498,7 +498,7 @@ class invoice_stddev_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -506,7 +506,7 @@ class invoice_stddev_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -516,7 +516,7 @@ class invoice_stddev_pop_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -524,7 +524,7 @@ class invoice_stddev_pop_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -534,7 +534,7 @@ class invoice_stddev_samp_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -542,17 +542,17 @@ class invoice_stddev_samp_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
 @dataclass(frozen=True)
 class invoice_sum_fields:
-    total_amount: Optional[int] = None    
+    total_amount: Optional[decimal.Decimal] = None    
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -560,7 +560,7 @@ class invoice_sum_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -582,7 +582,7 @@ class invoice_var_pop_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -590,7 +590,7 @@ class invoice_var_pop_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -600,7 +600,7 @@ class invoice_var_samp_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -608,7 +608,7 @@ class invoice_var_samp_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -618,7 +618,7 @@ class invoice_variance_fields:
 
     def to_json(self):
         res = {}
-        if total_amount is not None:
+        if self.total_amount is not None:
             res["total_amount"] = self.total_amount
         return res
         pass
@@ -626,7 +626,7 @@ class invoice_variance_fields:
     @classmethod
     def from_json(cls, d):
         return cls(
-            total_amount = d["total_amount"],
+            total_amount = ("total_amount" in d) if d["total_amount"] else None,
         )
         pass
 
@@ -647,29 +647,29 @@ class mutation_root:
 
     def to_json(self):
         res = {}
-        if delete_customer is not None:
+        if self.delete_customer is not None:
             res["delete_customer"] = self.delete_customer
-        if delete_customer_by_pk is not None:
+        if self.delete_customer_by_pk is not None:
             res["delete_customer_by_pk"] = self.delete_customer_by_pk
-        if delete_invoice is not None:
+        if self.delete_invoice is not None:
             res["delete_invoice"] = self.delete_invoice
-        if delete_invoice_by_pk is not None:
+        if self.delete_invoice_by_pk is not None:
             res["delete_invoice_by_pk"] = self.delete_invoice_by_pk
-        if insert_customer is not None:
+        if self.insert_customer is not None:
             res["insert_customer"] = self.insert_customer
-        if insert_customer_one is not None:
+        if self.insert_customer_one is not None:
             res["insert_customer_one"] = self.insert_customer_one
-        if insert_invoice is not None:
+        if self.insert_invoice is not None:
             res["insert_invoice"] = self.insert_invoice
-        if insert_invoice_one is not None:
+        if self.insert_invoice_one is not None:
             res["insert_invoice_one"] = self.insert_invoice_one
-        if update_customer is not None:
+        if self.update_customer is not None:
             res["update_customer"] = self.update_customer
-        if update_customer_by_pk is not None:
+        if self.update_customer_by_pk is not None:
             res["update_customer_by_pk"] = self.update_customer_by_pk
-        if update_invoice is not None:
+        if self.update_invoice is not None:
             res["update_invoice"] = self.update_invoice
-        if update_invoice_by_pk is not None:
+        if self.update_invoice_by_pk is not None:
             res["update_invoice_by_pk"] = self.update_invoice_by_pk
         return res
         pass
@@ -677,18 +677,18 @@ class mutation_root:
     @classmethod
     def from_json(cls, d):
         return cls(
-            delete_customer = d["delete_customer"],
-            delete_customer_by_pk = d["delete_customer_by_pk"],
-            delete_invoice = d["delete_invoice"],
-            delete_invoice_by_pk = d["delete_invoice_by_pk"],
-            insert_customer = d["insert_customer"],
-            insert_customer_one = d["insert_customer_one"],
-            insert_invoice = d["insert_invoice"],
-            insert_invoice_one = d["insert_invoice_one"],
-            update_customer = d["update_customer"],
-            update_customer_by_pk = d["update_customer_by_pk"],
-            update_invoice = d["update_invoice"],
-            update_invoice_by_pk = d["update_invoice_by_pk"],
+            delete_customer = ("delete_customer" in d) if d["delete_customer"] else None,
+            delete_customer_by_pk = ("delete_customer_by_pk" in d) if d["delete_customer_by_pk"] else None,
+            delete_invoice = ("delete_invoice" in d) if d["delete_invoice"] else None,
+            delete_invoice_by_pk = ("delete_invoice_by_pk" in d) if d["delete_invoice_by_pk"] else None,
+            insert_customer = ("insert_customer" in d) if d["insert_customer"] else None,
+            insert_customer_one = ("insert_customer_one" in d) if d["insert_customer_one"] else None,
+            insert_invoice = ("insert_invoice" in d) if d["insert_invoice"] else None,
+            insert_invoice_one = ("insert_invoice_one" in d) if d["insert_invoice_one"] else None,
+            update_customer = ("update_customer" in d) if d["update_customer"] else None,
+            update_customer_by_pk = ("update_customer_by_pk" in d) if d["update_customer_by_pk"] else None,
+            update_invoice = ("update_invoice" in d) if d["update_invoice"] else None,
+            update_invoice_by_pk = ("update_invoice_by_pk" in d) if d["update_invoice_by_pk"] else None,
         )
         pass
 
@@ -712,17 +712,17 @@ class query_root:
 
     def to_json(self):
         res = {}
-        if customer is not None:
+        if self.customer is not None:
             res["customer"] = self.customer
-        if customer_aggregate is not None:
+        if self.customer_aggregate is not None:
             res["customer_aggregate"] = self.customer_aggregate
-        if customer_by_pk is not None:
+        if self.customer_by_pk is not None:
             res["customer_by_pk"] = self.customer_by_pk
-        if invoice is not None:
+        if self.invoice is not None:
             res["invoice"] = self.invoice
-        if invoice_aggregate is not None:
+        if self.invoice_aggregate is not None:
             res["invoice_aggregate"] = self.invoice_aggregate
-        if invoice_by_pk is not None:
+        if self.invoice_by_pk is not None:
             res["invoice_by_pk"] = self.invoice_by_pk
         return res
         pass
@@ -730,12 +730,12 @@ class query_root:
     @classmethod
     def from_json(cls, d):
         return cls(
-            customer = d["customer"],
-            customer_aggregate = d["customer_aggregate"],
-            customer_by_pk = d["customer_by_pk"],
-            invoice = d["invoice"],
-            invoice_aggregate = d["invoice_aggregate"],
-            invoice_by_pk = d["invoice_by_pk"],
+            customer = ("customer" in d) if d["customer"] else None,
+            customer_aggregate = ("customer_aggregate" in d) if d["customer_aggregate"] else None,
+            customer_by_pk = ("customer_by_pk" in d) if d["customer_by_pk"] else None,
+            invoice = ("invoice" in d) if d["invoice"] else None,
+            invoice_aggregate = ("invoice_aggregate" in d) if d["invoice_aggregate"] else None,
+            invoice_by_pk = ("invoice_by_pk" in d) if d["invoice_by_pk"] else None,
         )
         pass
 
@@ -750,17 +750,17 @@ class subscription_root:
 
     def to_json(self):
         res = {}
-        if customer is not None:
+        if self.customer is not None:
             res["customer"] = self.customer
-        if customer_aggregate is not None:
+        if self.customer_aggregate is not None:
             res["customer_aggregate"] = self.customer_aggregate
-        if customer_by_pk is not None:
+        if self.customer_by_pk is not None:
             res["customer_by_pk"] = self.customer_by_pk
-        if invoice is not None:
+        if self.invoice is not None:
             res["invoice"] = self.invoice
-        if invoice_aggregate is not None:
+        if self.invoice_aggregate is not None:
             res["invoice_aggregate"] = self.invoice_aggregate
-        if invoice_by_pk is not None:
+        if self.invoice_by_pk is not None:
             res["invoice_by_pk"] = self.invoice_by_pk
         return res
         pass
@@ -768,12 +768,12 @@ class subscription_root:
     @classmethod
     def from_json(cls, d):
         return cls(
-            customer = d["customer"],
-            customer_aggregate = d["customer_aggregate"],
-            customer_by_pk = d["customer_by_pk"],
-            invoice = d["invoice"],
-            invoice_aggregate = d["invoice_aggregate"],
-            invoice_by_pk = d["invoice_by_pk"],
+            customer = ("customer" in d) if d["customer"] else None,
+            customer_aggregate = ("customer_aggregate" in d) if d["customer_aggregate"] else None,
+            customer_by_pk = ("customer_by_pk" in d) if d["customer_by_pk"] else None,
+            invoice = ("invoice" in d) if d["invoice"] else None,
+            invoice_aggregate = ("invoice_aggregate" in d) if d["invoice_aggregate"] else None,
+            invoice_by_pk = ("invoice_by_pk" in d) if d["invoice_by_pk"] else None,
         )
         pass
 

@@ -85,14 +85,14 @@ tojson_fields_f = mconcat . intersperse (charP '\n') . map tojson_field_f
 
 tojson_field_f :: (Printer a) =>  FieldDefinition -> a
 tojson_field_f (FieldDefinition _ name _ gtype _) =
-  stringP "        if " <> nameP name <> stringP " is not None:\n" <> stringP "            res[\"" <> nameP name <> stringP "\"] = self." <> nameP name
+  stringP "        if self." <> nameP name <> stringP " is not None:\n" <> stringP "            res[\"" <> nameP name <> stringP "\"] = self." <> nameP name
 
 fromjson_fields_f :: (Printer a) => [FieldDefinition] -> a
 fromjson_fields_f = mconcat . intersperse (charP '\n') . map fromjson_field_f
 
 fromjson_field_f :: (Printer a) =>  FieldDefinition -> a
 fromjson_field_f (FieldDefinition _ name _ gtype _) =
-  stringP "            " <> nameP name <> stringP " = d[\"" <> nameP name <> stringP "\"],"
+  stringP "            " <> nameP name <>" = (\"" <> nameP name <> "\" in d) if d[\"" <> nameP name <> stringP "\"] else None,"
 
 
 fields_f :: (Printer a) => [FieldDefinition] -> a
@@ -131,8 +131,8 @@ name_f (Name n) = case Txt.unpack n of
   "Float" -> "float"
   "uuid" -> "UUID"
   "numeric" -> "decimal.Decimal"
-  "bigint" -> "int"
   "Boolean" -> "bool"
+  "bigint" -> "int"
   _ -> textP n
 
 list_type_f :: (Printer a) => ListType -> a
