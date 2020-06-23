@@ -92,7 +92,7 @@ fromjson_fields_f = mconcat . intersperse (charP '\n') . map fromjson_field_f
 
 fromjson_field_f :: (Printer a) =>  FieldDefinition -> a
 fromjson_field_f (FieldDefinition _ name _ gtype _) =
-  stringP "            " <> nameP name <>" = (\"" <> nameP name <> "\" in d) if d[\"" <> nameP name <> stringP "\"] else None,"
+  stringP "            " <> nameP name <>" = d[\"" <> nameP name <> stringP "\"] if (\"" <> nameP name <> "\" in d) else None,"
 
 
 fields_f :: (Printer a) => [FieldDefinition] -> a
